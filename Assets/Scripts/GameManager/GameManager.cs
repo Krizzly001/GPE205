@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
     //Stores player controllers from world, players are there name
     public List<PlayerController> players;
 
+
+    //Input are object controller and tankpawn objects
+    public GameObject playerControllerPrefab;
+    public GameObject tankPawnPrefab;
+
+    public Transform spawnPoint;
+
     //BLUEPRINTS
 
     //Behavior class: place before start() ALWAYS
@@ -35,10 +42,29 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SpawnPlayer();
         
     }
     void Update()
     {
         
+    }
+
+    //FUNCTIONS
+
+    public void SpawnPlayer()
+    {
+        //Player Controller
+        // NewPlayerObj = BeSpawned(TypeOfObjBeingSpawned, Location(0,0,0), No Rotation)
+        GameObject newPlayerObj = Instantiate(playerControllerPrefab, Vector3.zero, Quaternion.identity);
+
+        //Pawn/Tank
+        // NewPawnObj = BeSpawned(TypeOfObjBeingSpawned, at spawnpointsPosition, spawnPointsRotation)
+        GameObject newPawnObj = Instantiate(tankPawnPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        Controller newController = newPlayerObj.GetComponent<Controller>();
+        Pawn newPawn = newPawnObj.GetComponent<Pawn>();
+
+        newController.pawn = newPawn;
     }
 }
