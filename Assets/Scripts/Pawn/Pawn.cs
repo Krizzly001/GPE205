@@ -19,7 +19,7 @@ public abstract class Pawn : MonoBehaviour //Parant
     
     //FUNCTIONS
 
-    // abilities are pawns can dox
+    // abilities are pawns can do
     public abstract void MoveForward();
     public abstract void MoveBackward();
     public abstract void RotateClockwise();

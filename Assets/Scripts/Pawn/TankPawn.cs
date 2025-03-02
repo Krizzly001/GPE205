@@ -5,6 +5,7 @@ public class TankPawn : Pawn // child
     //BLUEPRINTS
     public override void Start()
     {
+        //Variable inisalize
          mover = GetComponent<Mover>(); // Uses Mover component script 
     }
     public override void Update()

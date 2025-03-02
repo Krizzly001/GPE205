@@ -11,6 +11,14 @@ public class PlayerController : Controller
     //BLUEPRINTS
     public override void Start()
     {
+        if(GameManager.instance != null) //if my gameinstance exists
+        {
+            if(GameManager.instance.players != null) // and if list exists
+            {
+                GameManager.instance.players.Add(this); // add a player to my list of players
+
+            }
+        }
         // Run the Start() function from the parent (base) class
         base.Start();
     }
