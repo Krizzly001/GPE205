@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public abstract class Mover : MonoBehaviour
+public abstract class Mover : MonoBehaviour //Parent
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   //BLUEPRINTS
     public abstract void Start();
-
-    // Update is called once per frame
     public abstract void Update();
 
+    //FUNCTIONS
     public abstract void Move(Vector3 direction, float speed);
     public abstract void Rotate(float turnSpeed);
     

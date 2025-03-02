@@ -2,17 +2,17 @@ using UnityEngine;
 
 public abstract class Controller : MonoBehaviour
 {
-    // Variable to hold our Pawn
-    public Pawn pawn;
+    //VARIABLES: My Dev inputs
+    public Pawn pawn; // Grabs the pawn being controlled/ dev inputs
 
-    // Start is called before the first frame update
+    //BLUEPRINTS
     public virtual void Start()
     {      
     }
-    // Update is called once per frame
     public virtual void Update()
     {
     }
-    // Our child classes MUST override the way they process inputs
+
+    //FUNCTION
     public abstract void ProcessInputs();
 }

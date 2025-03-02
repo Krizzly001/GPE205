@@ -1,15 +1,17 @@
 using UnityEngine;
+//Private: Dev can't change variable/input
 
-public class TankMover : Mover
+public class TankMover : Mover // child
 {
-    // Variable to hold the Rigidbody Component
+    // VARIABLES/INPUTS
+    // Clones/Gets rigidbody and transform
     private Rigidbody rb;
     private Transform tf;
 
-    // Start is called before the first frame update
+    //BLUEPRINTS
     public override void Start()
     {
-        // Get the Rigidbody component
+        // Get the Rigidbody component/Automatically already input what part im controlling of the pawntank
         rb = GetComponent<Rigidbody>();  
         tf = GetComponent<Transform>();     
     }
@@ -18,6 +20,7 @@ public class TankMover : Mover
        
     }
 
+    //VARIABLES
     public override void Move(Vector3 direction, float speed)
     {
         Vector3 moveVector = direction.normalized * speed * Time.deltaTime;

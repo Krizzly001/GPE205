@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class TankPawn : Pawn
+public class TankPawn : Pawn // child
 {
-    // Start is called before the first frame update
+    //BLUEPRINTS
     public override void Start()
     {
-         mover = GetComponent<Mover>();
-        
+         mover = GetComponent<Mover>(); // Uses Mover component script 
     }
-
-    // Update is called once per frame
     public override void Update()
     {
-        
+ 
     }
+
+    //FUNCTIONS
+    // Uses Mover functions
 
     public override void MoveForward()
     {

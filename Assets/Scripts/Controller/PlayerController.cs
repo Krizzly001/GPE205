@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PlayerController : Controller
 {
+    //VARIABLES: dev inputs which key to use
     public KeyCode moveForwardKey;
     public KeyCode moveBackwardKey;
     public KeyCode rotateClockwiseKey;
     public KeyCode rotateCounterClockwiseKey;
 
-    // Start is called before the first frame update
+    //BLUEPRINTS
     public override void Start()
     {
         // Run the Start() function from the parent (base) class
@@ -23,6 +24,8 @@ public class PlayerController : Controller
         // Run the Update() function from the parent (base) class
         base.Update();        
     }
+
+    //FUNCTIONS
 
     public override void ProcessInputs()
     {

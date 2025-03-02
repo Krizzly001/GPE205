@@ -1,28 +1,25 @@
 using UnityEngine;
-
-public abstract class Pawn : MonoBehaviour
+// Abstract: Allowed to have children/child can override
+// Virtual: Child MIGHT override
+public abstract class Pawn : MonoBehaviour //Parant
 {
-    // Variable for move speed
-    public float moveSpeed;
-    // Variable for turn speed
-    public float turnSpeed;
+    //VARIABLES/INPUTS
+    public float moveSpeed; // Speed of pawn/tank
+    public float turnSpeed; // Turn Speed of pawn/tank
 
-    public Mover mover;
+    public Mover mover; // public script(Mover) TankPawnsNewVariable
 
-
-
-
-    // Start is called before the first frame update
+    //BLURPRINTS
     public virtual void Start()
     {      
-        
     }
-
-    // Update is called once per frame
     public virtual void Update()
     {       
     }
+    
+    //FUNCTIONS
 
+    // abilities are pawns can dox
     public abstract void MoveForward();
     public abstract void MoveBackward();
     public abstract void RotateClockwise();
