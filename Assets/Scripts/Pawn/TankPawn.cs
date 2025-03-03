@@ -78,5 +78,22 @@ public class TankPawn : Pawn // child
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
+    public override void MakeNoise()
+    {
+        if (noiseMaker != null)
+        {
+            noiseMaker.volumeDistance = noiseMakerVolume;
+        }
+
+    }
+    public override void StopNoise()
+    {
+        if (noiseMaker != null)
+        {
+            noiseMaker.volumeDistance = 0;
+        }
+
+    }
+
 
 }

@@ -44,25 +44,30 @@ public class PlayerController : Controller
         if (Input.GetKey(moveForwardKey)) 
         {
             pawn.MoveForward();
+            pawn.StopNoise();  
         }
 
         if (Input.GetKey(moveBackwardKey)) 
         {
             pawn.MoveBackward();
+            pawn.StopNoise();
         }
 
         if (Input.GetKey(rotateClockwiseKey)) 
         {
             pawn.RotateClockwise();
+            pawn.StopNoise();
         }
 
         if (Input.GetKey(rotateCounterClockwiseKey)) 
         {
             pawn.RotateCounterClockwise();
+            pawn.StopNoise();
         }
         if (Input.GetKeyDown(shootKey))
         {
             pawn.Shoot();
+            pawn.MakeNoise();
         }
 
     }

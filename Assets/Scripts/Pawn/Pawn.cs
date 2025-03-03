@@ -14,10 +14,14 @@ public abstract class Pawn : MonoBehaviour //Parant
 
     public float fireRate;
 
+    public float noiseMakerVolume;
+
     public Mover mover; // public script(Mover) TankPawnsNewVariable
 
     //Access my shooter
     public Shooter shooter;
+
+    public NoiseMaker noiseMaker;
 
     
     //BLURPRINTS
@@ -25,6 +29,7 @@ public abstract class Pawn : MonoBehaviour //Parant
     {
         mover = GetComponent<Mover>(); // Uses Mover component script       
         shooter = GetComponent<Shooter>();
+        noiseMaker = GetComponent<NoiseMaker>();
     }
     public virtual void Update()
     {       
@@ -42,5 +47,8 @@ public abstract class Pawn : MonoBehaviour //Parant
 
     public abstract void RotateTowards(Vector3 targetPosition);
     public abstract void RotateAway(Vector3 targetPosition);
+
+    public abstract void MakeNoise();
+    public abstract void StopNoise();
     
 }
