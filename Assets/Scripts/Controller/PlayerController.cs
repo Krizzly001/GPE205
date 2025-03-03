@@ -8,6 +8,8 @@ public class PlayerController : Controller
     public KeyCode rotateClockwiseKey;
     public KeyCode rotateCounterClockwiseKey;
 
+    public KeyCode shootKey;
+
     //BLUEPRINTS
     public override void Start()
     {
@@ -37,6 +39,8 @@ public class PlayerController : Controller
 
     public override void ProcessInputs()
     {
+        //Get Key: keeps going on hold
+        //Get Key Down: Being used down
         if (Input.GetKey(moveForwardKey)) 
         {
             pawn.MoveForward();
@@ -56,5 +60,10 @@ public class PlayerController : Controller
         {
             pawn.RotateCounterClockwise();
         }
+        if (Input.GetKeyDown(shootKey))
+        {
+            pawn.Shoot();
+        }
+
     }
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1728524362433247584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7216280842424417794}
+  m_Layer: 0
+  m_Name: FirePointTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7216280842424417794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728524362433247584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.608, z: 1.105}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8847652880639905613}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &9026220902408104102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66,7 +97,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 106551c78e1884da8a64814f887d85b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7216280842424417794}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 106551c78e1884da8a64814f887d85b3, type: 3}
       insertIndex: -1
@@ -83,6 +117,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 106551c78e1884da8a64814f887d85b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5713943384247332704}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 106551c78e1884da8a64814f887d85b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8197505886423441597}
   m_SourcePrefab: {fileID: 100100000, guid: 106551c78e1884da8a64814f887d85b3, type: 3}
 --- !u!1 &8179378907018991095 stripped
 GameObject:
@@ -151,7 +188,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnSpeed: 360
+  shellPrefab: {fileID: 6008324248889099232, guid: aca76df2271924a82937987d3ff07a0c, type: 3}
+  fireForce: 500
+  damageDone: 25
+  shellLifespan: 3
   mover: {fileID: 0}
+  shooter: {fileID: 0}
 --- !u!114 &1279838235083093614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +220,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+--- !u!114 &8197505886423441597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179378907018991095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c3f946a86a4463ca2e01e905565989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firepointTransform: {fileID: 7216280842424417794}
+--- !u!4 &8847652880639905613 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 106551c78e1884da8a64814f887d85b3, type: 3}
+  m_PrefabInstance: {fileID: 9026220902408104102}
+  m_PrefabAsset: {fileID: 0}

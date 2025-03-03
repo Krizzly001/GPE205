@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class TankPawn : Pawn // child
 {
+    private float timerDelay;
+    private float nextShootTime;
     //BLUEPRINTS
     public override void Start()
     {
+        timerDelay = 1 / fireRate;
+
+        nextShootTime = Time.time + nextShootTime;
         //Variable inisalize
-         mover = GetComponent<Mover>(); // Uses Mover component script 
+        base.Start();
     }
     public override void Update()
     {
+        base.Update();
  
     }
 
@@ -38,4 +44,17 @@ public class TankPawn : Pawn // child
     {
         mover.Rotate(-turnSpeed);
     }
+
+    public override void Shoot()
+    {
+        if (Time.time >= nextShootTime)
+        {
+            shooter.Shoot(shellPrefab, fireForce, damageDone, shellLifespan);
+            nextShootTime = Time.time + timerDelay;
+
+        }
+        
+    }
+
+
 }
