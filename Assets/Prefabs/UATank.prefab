@@ -192,6 +192,7 @@ MonoBehaviour:
   fireForce: 500
   damageDone: 25
   shellLifespan: 3
+  fireRate: 80
   mover: {fileID: 0}
   shooter: {fileID: 0}
 --- !u!114 &1279838235083093614
