@@ -3,7 +3,7 @@ using UnityEngine;
 public class AIController : Controller
 {
     //VARIABLES
-    public enum AIState{Guard, Chase};
+    public enum AIState{Guard, Chase, Flee};
     public AIState currentState;
 
     public GameObject target;
@@ -50,6 +50,15 @@ public class AIController : Controller
                     ChangeState(AIState.Guard);
                 }
             break;
+            case AIState.Flee:
+            // Dow work for chase
+                DoFleeState();
+            //check for trasition
+                if (IsDistanceLessThan(target, targetDistance))
+                {
+                    ChangeState(AIState.Flee);
+                }
+            break;
                 
         }
 
@@ -64,7 +73,44 @@ public class AIController : Controller
     {
         //Do Chase
         Debug.Log("Doing Chase state");
+        Seek(target);
     }
+    public void DoSeekState()
+    {
+        // Seek our target
+        Seek(target);
+    }
+    public void DoFleeState()
+    {
+        // Seek our target
+        Flee(target);
+    }
+
+
+
+    public void Seek (GameObject target)
+    {
+        // RotateTowards the Funciton
+        pawn.RotateTowards(target.transform.position);
+        // Move Forward
+        pawn.MoveForward();
+    }
+    public void Flee (GameObject target)
+    {
+        // RotateTowards the Funciton
+        pawn.RotateAway(target.transform.position);
+        // Move Forward
+        pawn.MoveForward();
+    }
+
+
+
+
+
+
+
+
+
 
 
     public bool IsDistanceLessThan(GameObject target, float distance)
@@ -84,4 +130,6 @@ public class AIController : Controller
         currentState = newState;
         lastStateChangeTime = Time.time;
     }
+
+   
 }

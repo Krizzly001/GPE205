@@ -39,4 +39,8 @@ public abstract class Pawn : MonoBehaviour //Parant
     public abstract void RotateCounterClockwise();
 
     public abstract void Shoot();
+
+    public abstract void RotateTowards(Vector3 targetPosition);
+    public abstract void RotateAway(Vector3 targetPosition);
+    
 }
