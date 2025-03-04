@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class TankPawn : Pawn // child
 {
+    //VARIABLES
     private float timerDelay;
     private float nextShootTime;
+
+
     //BLUEPRINTS
     public override void Start()
     {
@@ -56,6 +59,8 @@ public class TankPawn : Pawn // child
         
     }
 
+    
+
     public override void RotateTowards(Vector3 targetPosition)
     {
         // Find the vector to our target
@@ -77,6 +82,8 @@ public class TankPawn : Pawn // child
         // Rotate closer to that vector, but don't rotate more than our turn speed allows in one frame
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
+
+
 
     public override void MakeNoise()
     {

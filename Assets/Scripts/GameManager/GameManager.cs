@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
         
     }
 
+
+
+
     //FUNCTIONS
 
     public void SpawnPlayer()

@@ -3,18 +3,20 @@ using UnityEngine;
 public class AIController : Controller
 {
     //VARIABLES
-    public enum AIState{Guard, Chase, Flee};
-    public AIState currentState;
 
-    public GameObject target;
+    public enum AIState{Guard, Chase, Flee};//Array of different type of states
 
-    private float lastStateChangeTime;
+    public AIState currentState; //Holds current state array name variable
 
-    public float targetDistance;
+    public GameObject target; //The AIBeing targets
 
-    public float hearingDistance;
+    private float lastStateChangeTime; //When the state was applied
 
-    public float fieldOfView;
+    public float targetDistance; //input
+
+    public float hearingDistance;//input
+
+    public float fieldOfView;//inout
     public int currentWaypoint = 0;
 
 
@@ -22,18 +24,19 @@ public class AIController : Controller
     
     public override void Start()
     {
-        ChangeState(AIState.Guard);
+        ChangeState(AIState.Guard); 
     }
 
     public override void Update()
     {
-        ProcessInputs();
+        ProcessInputs(); //updates my state everymoment its changed
         
     }
 
     //FUNCTIONS
     public override void ProcessInputs()
     {
+        //if statements: if certain distance is near the AI itsll start that state
         switch (currentState)
         {
             case AIState.Guard:
@@ -42,8 +45,10 @@ public class AIController : Controller
             // Chekc for transitions
                 if (IsDistanceLessThan(target, targetDistance))
                 {
-                    ChangeState(AIState.Chase);
-                    CanSee(target);
+                    if(CanSee(target))
+                    {
+                        ChangeState(AIState.Chase);
+                    }
                 }
             break;
 
@@ -114,11 +119,6 @@ public class AIController : Controller
 
 
 
-
-
-
-
-
     public bool IsDistanceLessThan(GameObject target, float distance)
     {
         if(Vector3.Distance (pawn.transform.position, target.transform.position) < distance)
@@ -165,6 +165,7 @@ public class AIController : Controller
             return false;
         }
     }
+
      public bool CanSee(GameObject target)
     {
         // Find the vector from the agent to the target
