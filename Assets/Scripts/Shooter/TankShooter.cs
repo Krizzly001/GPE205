@@ -3,9 +3,8 @@ using UnityEngine;
 public class TankShooter : Shooter
 {
     //VARIABLES
-    public Transform firepointTransform; //Gets Owners Transform
-
-
+    //get transform(location/rotation) of the exact bullet prefab
+    public Transform firepointTransform; //input
 
     //BLUEPRINTS
     public override void Start()
@@ -18,25 +17,38 @@ public class TankShooter : Shooter
     }
 
     //FUNCTIONS
-    public override void Shoot(GameObject shellPrefab, float fireForce, float damageDone, float lifeSpan)
+    public override void Shoot(GameObject shellPrefab, float fireForce, float damageDone, float lifespan)
     {
-        //Create new bullet(object bullet being spawned, spawned at position, set rotation)
-        GameObject newShell = Instantiate(shellPrefab, firepointTransform.position, firepointTransform.rotation);
-        // Create a DamageOnHit on are newshell
-        DamageOnHit doh = newShell.GetComponent<DamageOnHit>();
+        //bullet info skin and location/roatation
+        GameObject newshell = Instantiate(shellPrefab, firepointTransform.position, firepointTransform.rotation);
+        
+        //assigning the damage being done, from damageOnHit script
+        DamageOnHit doh = newshell.GetComponent<DamageOnHit>();
 
-        if(doh != null) //Does have a value
+        if(doh != null) //if doh has a value...
         {
+            //DamageOnHit doh = Shoot(float damageDone)
             doh.damageDone = damageDone;
+
+            //get the tank/Pawn assign it as the shooter owner
+            //owner is in DamageOnHit, the point here is to pre-assign its owner
             doh.owner = GetComponent<Pawn>();
         }
-        Rigidbody rb = newShell.GetComponent<Rigidbody>();
+        //Getting bullets rigidbody to delete
+        Rigidbody rb = newshell.GetComponent<Rigidbody>();
 
-        if(rb != null)
+        //Checl if thid bullet has a rigidbody
+        if(rb != null)//if rb exists...
         {
+            //AddForce so that is can move
+            // making variable move foward by its force amount
             rb.AddForce(firepointTransform.forward * fireForce);
         }
 
-        Destroy(newShell, lifeSpan);
-    }
+        //Once its been launched...
+        Destroy(newshell, lifespan);
+        
+        
+    
+    }   
 }

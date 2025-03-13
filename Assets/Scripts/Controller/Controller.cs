@@ -1,18 +1,24 @@
 using UnityEngine;
-
-public abstract class Controller : MonoBehaviour
+// Abstract: Child can Inherit
+public abstract class Controller : MonoBehaviour //Parent
 {
-    //VARIABLES: My Dev inputs
-    public Pawn pawn; // Grabs the pawn being controlled/ dev inputs
+    //VARIABLES
+    public Pawn pawnObject; //Access to my Pawn Script, Parent and Child scripts
+
+
 
     //BLUEPRINTS
+    //Virtual: Might be used
     public virtual void Start()
-    {      
-    }
-    public virtual void Update()
     {
+        
+    }
+    public virtual  void Update()
+    {
+        
     }
 
-    //FUNCTION
+
+    //FUNCTIONS
     public abstract void ProcessInputs();
 }

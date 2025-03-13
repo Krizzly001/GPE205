@@ -1,74 +1,67 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class PlayerController : Controller
+public class PlayerController : Controller //Child
 {
-    //VARIABLES: dev inputs which key to use
-    public KeyCode moveForwardKey;
-    public KeyCode moveBackwardKey;
-    public KeyCode rotateClockwiseKey;
-    public KeyCode rotateCounterClockwiseKey;
+    // Variables
 
-    public KeyCode shootKey;
+    public KeyCode moveFowardKey; //Input key choice
+    public KeyCode moveBackwardKey; //Input Key choice
+    public KeyCode rotateClockwiseKey; //Input Key choice
+    public KeyCode rotateCounterClockwiseKey; //Input Key choice
+
+    public KeyCode shootKey;//Input key choice
+
+
 
     //BLUEPRINTS
     public override void Start()
     {
-        if(GameManager.instance != null) //if my gameinstance exists
+        //Game Manager stuff
+
+        if(GameManager.instance != null) //if game instance exist...
         {
-            if(GameManager.instance.players != null) // and if list exists
+            if(GameManager.instance.players != null)//and tracks player..
             {
-                GameManager.instance.players.Add(this); // add a player to my list of players
-
+                GameManager.instance.players.Add(this); //add into game manager list
             }
+                
         }
-        // Run the Start() function from the parent (base) class
-        base.Start();
-    }
 
-    // Update is called once per frame
+
+
+        base.Start(); //Calls Parents start info
+    }
     public override void Update()
-    {   
-        // Process our Keyboard Inputs
+    {
+        //Checks for Key every moment
         ProcessInputs();
-
-        // Run the Update() function from the parent (base) class
-        base.Update();        
+        base.Update(); //Calls Parents update info
     }
+
 
     //FUNCTIONS
-
     public override void ProcessInputs()
     {
-        //Get Key: keeps going on hold
-        //Get Key Down: Being used down
-        if (Input.GetKey(moveForwardKey)) 
+        if (Input.GetKey(moveFowardKey))
         {
-            pawn.MoveForward();
-            pawn.StopNoise();  
+            pawnObject.MoveFoward(); //Calls TankPawn Functions
         }
-
-        if (Input.GetKey(moveBackwardKey)) 
+        if (Input.GetKey(moveBackwardKey))
         {
-            pawn.MoveBackward();
-            pawn.StopNoise();
+            pawnObject.MoveBackward(); //Calls TankPawn Functions
         }
-
-        if (Input.GetKey(rotateClockwiseKey)) 
+        if (Input.GetKey(rotateClockwiseKey))
         {
-            pawn.RotateClockwise();
-            pawn.StopNoise();
+            pawnObject.RotateClockwise(); //Calls TankPawn Functions
         }
-
-        if (Input.GetKey(rotateCounterClockwiseKey)) 
+        if (Input.GetKey(rotateCounterClockwiseKey))
         {
-            pawn.RotateCounterClockwise();
-            pawn.StopNoise();
+            pawnObject.RotateCounterClockwise(); //Calls TankPawn Functions
         }
-        if (Input.GetKeyDown(shootKey))
+        if (Input.GetKeyDown(shootKey))//GetKeyDown: Can only be used on each press/ used onece not constant
         {
-            pawn.Shoot();
-            pawn.MakeNoise();
+            pawnObject.Shoot();
         }
-
     }
 }

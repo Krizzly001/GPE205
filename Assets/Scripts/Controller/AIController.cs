@@ -3,187 +3,160 @@ using UnityEngine;
 public class AIController : Controller
 {
     //VARIABLES
+    //Different "personalities" are AI can inherit/have
+    public enum AIState {Guard, Chase, Flee}; //enum == array
 
-    public enum AIState{Guard, Chase, Flee};//Array of different type of states
+    //Automatic state are AI will have
+    public AIState currentState;
 
-    public AIState currentState; //Holds current state array name variable
+    //Target I am Chasing... which is target
+    public GameObject target; // The tank  the user controls
 
-    public GameObject target; //The AIBeing targets
+    //Save the last state we were in
+    private float lastStateChangeTime;
 
-    private float lastStateChangeTime; //When the state was applied
+    public float targetDistance;
+    public float targetDistanceFlee;
 
-    public float targetDistance; //input
-
-    public float hearingDistance;//input
-
-    public float fieldOfView;//inout
-    public int currentWaypoint = 0;
 
 
     //BLUEPRINTS
-    
     public override void Start()
     {
-        ChangeState(AIState.Guard); 
-    }
-
-    public override void Update()
-    {
-        ProcessInputs(); //updates my state everymoment its changed
+        
         
     }
 
-    //FUNCTIONS
-    public override void ProcessInputs()
+    
+    public override void Update()
     {
-        //if statements: if certain distance is near the AI itsll start that state
-        switch (currentState)
+        ProcessInputs();
+    }
+
+    //FUNCTIONS
+    public override void ProcessInputs()//"listens for keys.
+    {
+        switch(currentState)//if current state is... 
         {
-            case AIState.Guard:
-            // Do work for Guard
+            case AIState.Guard://to Guard
+
+                //FOR FLEE    
                 DoGuardState();
-            // Chekc for transitions
-                if (IsDistanceLessThan(target, targetDistance))
+                if(targetDistance == 0)//Its for Flee
                 {
-                    if(CanSee(target))
+                    if(IsDistanceLessThan(target, targetDistanceFlee))//(user tank, distance limit)
                     {
-                        ChangeState(AIState.Chase);
+                        //if user tank too close(under 10) AI will chase
+                        ChangeState(AIState.Flee);
                     }
                 }
-            break;
-
-            case AIState.Chase:
-            // Dow work for chase
-                DoChaseState();
-            //check for trasition
-                if (IsDistanceLessThan(target, targetDistance))
+                
+                //FOR CHASE
+                if(IsDistanceLessThan(target, targetDistance))//(user tank, distance limit)
                 {
+                    //if user tank too close(under 10) AI will chase
+                    ChangeState(AIState.Chase);
+                }
+                
+                break;
+
+            case AIState.Chase://to chase
+                //Does chase stuff...
+                DoChaseState();
+
+                if(!IsDistanceLessThan(target, targetDistance))//(user tank, distance limit)
+                {
+                    //if user tank too close(under 10) AI will guard and not chase
                     ChangeState(AIState.Guard);
                 }
-            break;
-            case AIState.Flee:
-            // Dow work for chase
-                DoFleeState();
-            //check for trasition
-                if (IsDistanceLessThan(target, targetDistance))
-                {
-                    ChangeState(AIState.Flee);
-                }
-            break;
                 
+                break;
+
+            case AIState.Flee://to flee
+        
+                if(IsDistanceLessThan(target, targetDistanceFlee))//(user tank, distance limit)
+                {
+                    //if user tank too close(under 10) AI will guard and not chase
+                    DoFleeState();
+                    if(IsDistanceLessThan(target, targetDistanceFlee))
+                    {
+                        ChangeState(AIState.Guard);
+                    }
+                    
+                }
+                
+            break;
+
+
         }
 
     }
 
+    //STATE CALCULATIONS
+
+
+    //Guard stuff calculations
     public void DoGuardState()
     {
         //Do Nothing
-        Debug.Log("Doing Guard state");
+        Debug.Log("Guardinggg");
     }
+
+    //Chase stuff calculations
     public void DoChaseState()
     {
-        //Do Chase
-        Debug.Log("Doing Chase state");
-        Seek(target);
-    }
-    public void DoSeekState()
-    {
-        // Seek our target
-        Seek(target);
+        ChaseTarget(target);
+        //Seek for target
+        Debug.Log("Chasinggg");
     }
     public void DoFleeState()
     {
-        // Seek our target
-        Flee(target);
+        FleeTarget(target);
+        //Seek for target
+        Debug.Log("Fleeing");
     }
-
-
-
-    public void Seek (GameObject target)
-    {
-        // RotateTowards the Funciton
-        pawn.RotateTowards(target.transform.position);
-        // Move Forward
-        pawn.MoveForward();
-    }
-    public void Flee (GameObject target)
-    {
-        // RotateTowards the Funciton
-        pawn.RotateAway(target.transform.position);
-        // Move Forward
-        pawn.MoveForward();
-    }
-
-
-
-
-
 
     public bool IsDistanceLessThan(GameObject target, float distance)
     {
-        if(Vector3.Distance (pawn.transform.position, target.transform.position) < distance)
+        // if my AItank's position/transform and users tank position/trandform is less then the dthe distance I want the to be...
+        if(Vector3.Distance (pawnObject.transform.position, target.transform.position) < distance)
         {
-            return true;
+            return true;// if they are less then the distance I want them to be, "chase user tank"
         }
         else
         {
-            return false;
+            return false;// if bigger do nothing.
         }
     }
 
-    public virtual void ChangeState (AIState newState)
+
+    public virtual void ChangeState(AIState nextState) //Are default would be Guard tho.
     {
-        currentState = newState;
-        lastStateChangeTime = Time.time;
+        //ex. if currentState is Guard save for when I finish chasing
+        // saves into newState
+        currentState = nextState;
+
+        //Save current time when state is changed 
+        lastStateChangeTime = Time.time; 
     }
 
-    public bool CanHear(GameObject target)
+    //Seek for users tank
+    public void ChaseTarget (GameObject target)
     {
-        // Get the target's NoiseMaker
-        NoiseMaker noiseMaker = target.GetComponent<NoiseMaker>();
-        // If they don't have one, they can't make noise, so return false
-        if (noiseMaker == null) 
-        {
-            return false;
-        }
-        // If they are making 0 noise, they also can't be heard
-        if (noiseMaker.volumeDistance <= 0) 
-        {
-            return false;
-        }
-        // If they are making noise, add the volumeDistance in the noisemaker to the hearingDistance of this AI
-        float totalDistance = noiseMaker.volumeDistance + hearingDistance;
-        // If the distance between our pawn and target is closer than this...
-        if (Vector3.Distance(pawn.transform.position, target.transform.position) <= totalDistance) 
-        {
-            // ... then we can hear the target
-            return true;
-        }
-        else 
-        {
-            // Otherwise, we are too far away to hear them
-            return false;
-        }
+        // RotateTowards the Funciton
+        pawnObject.RotateTowards(target.transform.position);
+        // Move Forward
+        pawnObject.MoveFoward();
     }
-
-     public bool CanSee(GameObject target)
+    public void FleeTarget (GameObject target)
     {
-        // Find the vector from the agent to the target
-        Vector3 agentToTargetVector = target.transform.position - transform.position;
-        // Find the angle between the direction our agent is facing (forward in local space) and the vector to the target.
-        float angleToTarget = Vector3.Angle(agentToTargetVector, pawn.transform.forward);
-        // if that angle is less than our field of view
-        if (angleToTarget < fieldOfView) 
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        // RotateTowards the Funciton
+        pawnObject.RotateAway(target.transform.position);
+        // Move Forward
+        pawnObject.MoveFoward();
     }
-    
-
-
    
+
+
 }
+

@@ -1,106 +1,99 @@
 using UnityEngine;
 
-public class TankPawn : Pawn // child
+public class TankPawn : Pawn // Child of Pawn
 {
+    
     //VARIABLES
-    private float timerDelay;
+    //Eveytime we shoot we want to delay the next time we are allowed to shoot again
     private float nextShootTime;
+
+    private float timerDelay;
+
+
 
 
     //BLUEPRINTS
+   
     public override void Start()
     {
-        timerDelay = 1 / fireRate;
+        //fireRate variable in are Parent class
+        timerDelay = 1/fireRate;
+        // ex. fireRate = 3
+        // my tank is capable of firing 3 bullets per 1 second
+        //Higher the fireRate is the faster bullets spawn and shoot
 
+        //calculated the time im allowed to shoot(future time) = current time + time I wanna to shoot next later
         nextShootTime = Time.time + nextShootTime;
-        //Variable inisalize
-        base.Start();
+        
+        base.Start();//Calls parents start()
     }
+
+    
     public override void Update()
     {
         base.Update();
- 
     }
+
 
     //FUNCTIONS
-    // Uses Mover functions
 
-    public override void MoveForward()
+    //Override: Change information from the parent function
+    //Transform: unit vector ahead of the game object
+    public override void MoveFoward()
     {
-        mover.Move(transform.forward, moveSpeed);
-        
-    }
+        storeMover.Move(transform.forward, moveSpeed);
 
+    }
     public override void MoveBackward()
     {
-        mover.Move(transform.forward, -moveSpeed);
-        
-    }
+        storeMover.Move(transform.forward, -moveSpeed);//-Opposite direction
 
+    }
     public override void RotateClockwise()
     {
-        mover.Rotate(turnSpeed);
-        
-    }
+        storeMover.Rotate(turnSpeed);
 
+    }
     public override void RotateCounterClockwise()
     {
-        mover.Rotate(-turnSpeed);
-    }
+        storeMover.Rotate(-turnSpeed);
 
+    }
     public override void Shoot()
     {
-        if (Time.time >= nextShootTime)
+        if(Time.time >= nextShootTime) //if its time to shoot -> shoot
         {
-            shooter.Shoot(shellPrefab, fireForce, damageDone, shellLifespan);
+            //place into the shooter and fires
+            storeShooter.Shoot(shellPrefab, fireForce, damageDone, shelllifespan);
+            
+            //update my next shoot time im allowed so we arent spamming
+            // delays my next shootTime
             nextShootTime = Time.time + timerDelay;
-
         }
         
     }
 
-    
-
     public override void RotateTowards(Vector3 targetPosition)
     {
-        // Find the vector to our target
+        // Find the vector to our users tank
         Vector3 vectorToTarget = targetPosition - transform.position;
         // Find the rotation to look down that vector
         Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
         // Rotate closer to that vector, but don't rotate more than our turn speed allows in one frame
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-    }
 
+    }
     public override void RotateAway(Vector3 targetPosition)
     {
-        // Find the vector to our target and reverse it to rotate away
-        Vector3 vectorAwayFromTarget = transform.position - targetPosition; 
-
+        // Find the vector to our users tank
+        Vector3 vectorToTarget = targetPosition - transform.position;
         // Find the rotation to look down that vector
-        Quaternion targetRotation = Quaternion.LookRotation(vectorAwayFromTarget, Vector3.up);
-
+        Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
         // Rotate closer to that vector, but don't rotate more than our turn speed allows in one frame
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-    }
-
-
-
-    public override void MakeNoise()
-    {
-        if (noiseMaker != null)
-        {
-            noiseMaker.volumeDistance = noiseMakerVolume;
-        }
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, -turnSpeed * Time.deltaTime);
 
     }
-    public override void StopNoise()
-    {
-        if (noiseMaker != null)
-        {
-            noiseMaker.volumeDistance = 0;
-        }
 
-    }
 
 
 }

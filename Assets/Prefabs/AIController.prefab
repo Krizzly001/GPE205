@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5432841476930902561
+--- !u!1 &1718637282706923118
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 462421917736793577}
-  - component: {fileID: 6822601170355986171}
+  - component: {fileID: 3220320506663076895}
+  - component: {fileID: 1086379738874276223}
   m_Layer: 0
   m_Name: AIController
   m_TagString: Untagged
@@ -17,37 +17,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &462421917736793577
+--- !u!4 &3220320506663076895
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5432841476930902561}
+  m_GameObject: {fileID: 1718637282706923118}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1629134, y: 0.45213953, z: -0.79076755}
+  m_LocalPosition: {x: -2.658504, y: 1.8753805, z: 4.5769806}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6822601170355986171
+--- !u!114 &1086379738874276223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5432841476930902561}
+  m_GameObject: {fileID: 1718637282706923118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7edd0b66a02694136bbcc60ed38bbe08, type: 3}
+  m_Script: {fileID: 11500000, guid: 961812c2dbfcd4f53841af570851f792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  currentState: 1
-  target: {fileID: 0}
-  targetDistance: 3
-  hearingDistance: 5
-  fieldOfView: 8
-  currentWaypoint: 3
+  pawnObject: {fileID: 3868089597407049474, guid: 78e0c9b5824e84d1a91b9d405d57b0fb, type: 3}
+  currentState: 0
+  target: {fileID: 5367341985400432363, guid: 78e0c9b5824e84d1a91b9d405d57b0fb, type: 3}
+  targetDistance: 10
