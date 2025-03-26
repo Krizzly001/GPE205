@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : Controller //Child
 {
     // Variables
+    
 
     public KeyCode moveFowardKey; //Input key choice
     public KeyCode moveBackwardKey; //Input Key choice
@@ -34,9 +37,15 @@ public class PlayerController : Controller //Child
     }
     public override void Update()
     {
+        if(pawnObject == null)
+        {
+             Death_Menu();
+        }
+   
         //Checks for Key every moment
         ProcessInputs();
         base.Update(); //Calls Parents update info
+
     }
 
 
@@ -63,5 +72,12 @@ public class PlayerController : Controller //Child
         {
             pawnObject.Shoot();
         }
+    }
+
+    public void Death_Menu()
+    {
+        SceneManager.LoadScene("Lose");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lose");
+
     }
 }

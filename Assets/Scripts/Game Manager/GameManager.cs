@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,6 +78,16 @@ public class GameManager : MonoBehaviour
         players = new List<PlayerController>();
 
     }
+    public void LoadScene(string TankGame)
+    {
+        if (GameManager.instance == null)
+        {
+            Debug.LogError("GameManager was destroyed or not found in the new scene!");
+        }
+
+        SceneManager.LoadScene(TankGame);
+
+    }
     
 
 
@@ -85,10 +96,18 @@ public class GameManager : MonoBehaviour
     //BLUEPRINTS
     void Start()
     {
+        if (mapGenerator == null)
+        {
+            mapGenerator = FindAnyObjectByType<MapGenerator>();
+        }
         //Check if mapGenerator already exist in are world..Generatemap
         if(mapGenerator != null)
         {
             mapGenerator.GenerateMap();
+        }
+        else
+        {
+            Debug.LogError("MapGenerator not found in scene!");
         }
         SpawnPlayer();
 
@@ -194,4 +213,40 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+         // Game States
+    public GameObject TitleScreenStateObject;
+    public GameObject MainMenuStateObject;
+    public GameObject OptionsScreenStateObject;
+    public GameObject CreditsScreenStateObject;
+    public GameObject GameplayStateObject;
+    public GameObject GameOverScreenStateObject;
+
+    private void DeactivateAllStates()
+    {
+        // Deactivate all Game States
+        TitleScreenStateObject.SetActive(false);
+        MainMenuStateObject.SetActive(false);
+        OptionsScreenStateObject.SetActive(false);
+        CreditsScreenStateObject.SetActive(false);
+        GameplayStateObject.SetActive(false);
+        GameOverScreenStateObject.SetActive(false);
+    }
+     public void ActivateTitleScreen()
+    {
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the title screen
+        TitleScreenStateObject.SetActive(true);
+        // Do whatever needs to be done when the title screen starts.
+        // For this game, there is nothing to do, but it may be different for your game.
+       
+    }
+    public void ActivateMainMenu()
+    {
+        DeactivateAllStates();
+        MainMenuStateObject.SetActive(true);
+    }
+
+    
 }
