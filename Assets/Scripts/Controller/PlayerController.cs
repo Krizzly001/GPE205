@@ -17,6 +17,8 @@ public class PlayerController : Controller //Child
 
 
 
+
+
     //BLUEPRINTS
     public override void Start()
     {
@@ -39,7 +41,10 @@ public class PlayerController : Controller //Child
     {
         if(pawnObject == null)
         {
+             ;
+
              Death_Menu();
+            
         }
    
         //Checks for Key every moment

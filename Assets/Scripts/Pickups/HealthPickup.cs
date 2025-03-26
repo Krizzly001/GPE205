@@ -6,6 +6,7 @@ public class HealthPickup : MonoBehaviour
     //VARIABLES
 
     public HealthPowerup powerup;
+    public GameObject PowerUpSFX;
 
     //BLUEPRINTS
     void Start()
@@ -28,6 +29,8 @@ public class HealthPickup : MonoBehaviour
         {
             //Add the powerup...
             powerupManager.Add(powerup);
+            PowerUpSFX.SetActive(false);
+            PowerUpSFX.SetActive(false);
 
             //Then destroy this pickup object
             Destroy(gameObject);

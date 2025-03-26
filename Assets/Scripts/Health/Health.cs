@@ -5,6 +5,7 @@ public class Health : MonoBehaviour
     //VARIABLES
     public float currentHealth;
     public float maxHealth;
+    
 
 
 

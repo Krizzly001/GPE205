@@ -5,10 +5,13 @@ public class TankShooter : Shooter
     //VARIABLES
     //get transform(location/rotation) of the exact bullet prefab
     public Transform firepointTransform; //input
+    public GameObject BulletEndSFX;
+    
 
     //BLUEPRINTS
     public override void Start()
     {
+        
         
     }
     public override void Update()
@@ -44,9 +47,17 @@ public class TankShooter : Shooter
             // making variable move foward by its force amount
             rb.AddForce(firepointTransform.forward * fireForce);
         }
+        
+
+        
+        BulletEndSFX.SetActive(true);
 
         //Once its been launched...
         Destroy(newshell, lifespan);
+        BulletEndSFX.SetActive(false);
+        
+        
+        
         
         
     

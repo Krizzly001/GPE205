@@ -50,3 +50,4 @@ MonoBehaviour:
   rotateClockwiseKey: 100
   rotateCounterClockwiseKey: 97
   shootKey: 32
+  DeathSFX: {fileID: 9096975764476375860, guid: 8e5e17b60946af747b11673a7e020186, type: 3}
