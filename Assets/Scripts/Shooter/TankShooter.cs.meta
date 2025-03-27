@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 6f082b93e7807478889abd92a675a403
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - firepointTransform: {instanceID: 0}
+  - BulletEndSFX: {fileID: 2967331012653032168, guid: 7c15cff6195b1d24c8e3283e70b672ce, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
